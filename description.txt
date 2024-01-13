@@ -1,0 +1,10 @@
+Blog web application (Udemy curse project):
+The web will allow users to create and view blog posts.
+Tools
+Node
+Express
+EJS
+Functions:
+Post creation: Users should be able to create new posts
+Post viewing: The home page should allow users to view all their posts.
+Post update/delete: Users should be able to edit and delete their posts.
