@@ -7,6 +7,39 @@
     <%- include('partials/head.ejs') %>
 </head>
 <body>
-    <h1 class="h1">Hello world</h1>
+    <%- include('partials/nav.ejs') %>
+    <main class="container">
+        <section class="filters my-4">
+            <ul>
+                <li>
+                    <a class="filter" href="#">All</a>
+                </li>
+                <li>
+                    <a class="filter" href="#">Most liked</a>
+                </li>
+                <li>
+                    <a class="filter" href="#">Most discussed</a>
+                </li>
+            </ul>
+        </section>
+        <section class="posts">
+            <article class="post-box row py-4 px-3">
+                <div class="col-sm-6">
+                    <h2>Post title</h2>
+                    <p class="post-content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi sequi at animi officia ad ducimus mollitia illo, a odit facere accusantium. Consequatur id incidunt quia neque omnis est provident quibusdam.</p>
+                </div>
+                <img class="post-img col-6" src="#" alt="post-img">
+                <div class="post-features">
+                    <span>author</span>
+                    <span>date</span>
+                    <span>likes</span>
+                    <span>comments</span>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer class="container">
+        <p>Copyright</p>
+    </footer>
 </body>
 </html>
