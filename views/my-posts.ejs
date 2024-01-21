@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My posts</title>
+    <%- include('partials/head.ejs') %>
+</head>
+<body>
+    <%- include('partials/nav.ejs') %>
+    <main class="container my-4">
+        <h2>My posts</h2>
+        <div class="my-post my-4">
+            <h3>Post title</h3>
+            <div class="options">
+                <a href="/edit">Edit</a>
+                <a href="/delete">Delete</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

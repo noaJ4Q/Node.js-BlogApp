@@ -1,5 +1,12 @@
 :root{
-    --color-grey: #f8f8f8;
+    --color-black: #1a1a1a;
+    --color-black-hover: #000000;
+    --color-gray: #fafafa;
+    --color-gray-hover: #eaeaea;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
 }
 
 *{
@@ -12,6 +19,10 @@
     max-width: 720px;
 }
 
+.navbar{
+    background-color: var(--color-gray);
+}
+
 .navbar a{
     color: black;
     text-decoration: none;
@@ -22,35 +33,99 @@
     padding: 0;
     display: flex;
     justify-content: start;
+    align-items: center;
     gap: .8rem;
 }
 
-.filter{
-    background-color: var(--color-grey);
+.search-bar{
+    display: inline-block;
+    margin-left: auto;
+}
+
+.post{
+    background-color: var(--color-gray);
     border-radius: .4rem;
+    transition: all 0.3s;
+}
+
+.post img{
+    object-fit: cover;
+}
+
+.post-features{
+    display: flex;
+    font-size: .8rem;
+    justify-content: space-between;
+}
+
+.post-feature{
+    display: flex;
+    gap: 1rem;
+}
+
+.post:hover{
+    transform: scale(1.02);
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    margin: 1rem 0;
+}
+
+.button{
+    border: 0;
+    border-radius: .4rem;
+    color: black;
     font-size: .85rem;
     text-decoration: none;
     transition: all 0.3s;
     padding: .4rem .8rem;
 }
 
-.filter:hover{
-    background-color: black;
+.primary{
+    background-color: var(--color-black);
     color: white;
 }
 
-.post-box{
-    background-color: var(--color-grey);
-    border-radius: .4rem;
+.primary:hover{
+    background-color: var(--color-black-hover);
 }
 
-.post-box img{
+.secondary{
+    background-color: var(--color-gray);
+}
+
+.secondary:hover{
+    background-color: var(--color-gray-hover);
+}
+
+footer{
+    font-size: .8rem;
+    text-align: center;
+}
+
+.post-page img{
+    display: inline-block;
     object-fit: cover;
+    width: 100%;
 }
 
-.post-features{
+.my-post{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem .8rem;
+}
+
+.my-post h3{
+    font-size: 1.2rem;
+}
+
+.options{
+    display: flex;
+    gap: 1rem;
 }
 
 @media screen and (max-width: 720px){
