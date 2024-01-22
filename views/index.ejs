@@ -26,95 +26,80 @@
                 </ul>
             </section>
             <section class="posts">
-                <article class="post row my-4 py-4 px-3">
-                    <div class="col-sm-8">
-                        <h2>Post title</h2>
-                        <p class="post-content">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Quasi sequi at animi officia ad ducimus
-                            mollitia illo, a odit facere accusantium.
-                            Consequatur id incidunt quia neque omnis est
-                            provident quibusdam.
-                        </p>
-                    </div>
-                    <img class="post-img col-4" src="#" alt="post-img" />
-                    <div class="post-features">
-                        <div class="post-feature post-interactions">
-                            <span>author</span>
-                            <span>date</span>
-                            <span>likes</span>
-                            <span>comments</span>
+                <!--
+                <a class="text-reset text-decoration-none" href="post?id=2">
+                    <article class="post my-4 py-4 px-3">
+                        <div class="post-info mb-4 row">
+                            <div class="col-sm-8">
+                                <h2 class="mb-2">Post title</h2>
+                                <p class="post-content">
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing
+                                    elit. Quasi sequi at animi officia ad ducimus
+                                    mollitia illo, a odit facere accusantium.
+                                    Consequatur id incidunt quia neque omnis est
+                                    provident quibusdam.
+                                </p>
+                            </div>
+                            <img class="post-img col-4" src="#" alt="post-img" />
                         </div>
-                        <div class="post-feature post-tags">
-                            <span>tag1</span>
-                            <span>tag2</span>
-                            <span>tag3</span>
+                        <div class="post-features">
+                            <div class="post-feature post-interactions">
+                                <span>author</span>
+                                <span>date</span>
+                                <span>likes</span>
+                                <span>comments</span>
+                            </div>
+                            <div class="post-feature post-tags">
+                                <span>tag1</span>
+                                <span>tag2</span>
+                                <span>tag3</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article class="post row my-4 py-4 px-3">
-                    <div class="col-sm-8">
-                        <h2>Post title</h2>
-                        <p class="post-content">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Quasi sequi at animi officia ad ducimus
-                            mollitia illo, a odit facere accusantium.
-                            Consequatur id incidunt quia neque omnis est
-                            provident quibusdam.
-                        </p>
-                    </div>
-                    <img class="post-img col-4" src="#" alt="post-img" />
-                    <div class="post-features">
-                        <div class="post-feature post-interactions">
-                            <span>author</span>
-                            <span>date</span>
-                            <span>likes</span>
-                            <span>comments</span>
+                    </article>
+                </a>
+                -->
+
+                <% for (let i = 0; i < posts.length; i++) { %>
+                <a class="text-reset text-decoration-none" href="post?id=<%= posts[i].id %>">
+                    <article class="post my-4 p-4">
+                        <div class="post-info mb-4 row">
+                            <div class="col-sm-8">
+                                <h2 class="mb-2"><%= posts[i].title %></h2>
+                                <p class="post-content"><%= posts[i].content %></p>
+                            </div>
+                            <img
+                                class="post-img col-4"
+                                src="<%= posts[i].image %>"
+                                alt="post-img"
+                            />
                         </div>
-                        <div class="post-feature post-tags">
-                            <span>tag1</span>
-                            <span>tag2</span>
-                            <span>tag3</span>
+                        <div class="post-features">
+                            <div class="post-feature post-interactions">
+                                <span> Author: <%= posts[i].author %> </span>
+                                <span> Date: <%= posts[i].date %> </span>
+                                <span> Likes: <%= posts[i].likes %> </span>
+                                <span>comments</span>
+                            </div>
+                            <div class="post-feature post-tags">
+                                <span>tag1</span>
+                                <span>tag2</span>
+                                <span>tag3</span>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article class="post row my-4 py-4 px-3">
-                    <div class="col-sm-8">
-                        <h2>Post title</h2>
-                        <p class="post-content">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Quasi sequi at animi officia ad ducimus
-                            mollitia illo, a odit facere accusantium.
-                            Consequatur id incidunt quia neque omnis est
-                            provident quibusdam.
-                        </p>
-                    </div>
-                    <img class="post-img col-4" src="#" alt="post-img" />
-                    <div class="post-features">
-                        <div class="post-feature post-interactions">
-                            <span>author</span>
-                            <span>date</span>
-                            <span>likes</span>
-                            <span>comments</span>
-                        </div>
-                        <div class="post-feature post-tags">
-                            <span>tag1</span>
-                            <span>tag2</span>
-                            <span>tag3</span>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </a>
+                <% } %>
             </section>
             <div class="pagination">
-                <a class="button" href="#">&laquo;</a>
-                <a class="button" href="#">1</a>
-                <a class="button" href="#">2</a>
-                <a class="button" href="#">3</a>
-                <a class="button" href="#">&raquo;</a>
+                <a class="button secondary" href="#">&laquo;</a>
+                <a class="button secondary" href="#">1</a>
+                <a class="button secondary" href="#">2</a>
+                <a class="button secondary" href="#">3</a>
+                <a class="button secondary" href="#">&raquo;</a>
             </div>
         </main>
-        <footer class="container">
-            <p>&copy; Copyright <%= new Date().getFullYear() %></p>
+        <footer class="py-4">
+            <p>&copy; Copyright <%= new Date().getFullYear() %> - <a class="text-reset" target="_blank" href="https://github.com/noaJ4Q">noaJ4Q</a></p>
         </footer>
     </body>
 </html>

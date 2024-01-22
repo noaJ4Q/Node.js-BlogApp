@@ -9,18 +9,26 @@
 <body>
     <%- include('partials/nav.ejs') %>
     <main class="container post-page my-4">
-        <h2 class="my-3">Post title</h2>
-        <div class="post-info">
-            <span>Author</span>
-            <span>Date</span>
+        <h2 class="my-3">
+            <%= post.title %>
+        </h2>
+        <div class="post-page-info">
+            <span>
+                <%= post.author %>
+            </span>
+            <span>
+                <%= post.date %>
+            </span>
         </div>
-        <img class="my-3" src="#" alt="post-image">
-        <p class="my-3">Content - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore excepturi vero repellendus placeat dolorum quibusdam consectetur aliquam aperiam maiores ipsa temporibus commodi facilis, ad necessitatibus id quasi, reiciendis modi in. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium consequatur repellendus dolorum modi voluptatem porro fuga, quasi optio, excepturi nisi facere qui laboriosam beatae expedita, numquam sapiente nulla voluptas error.</p>
-        <div class="interactions">
-            <span>Like</span>
+        <img class="my-3" src="<%= post.image %>" alt="post-image">
+        <p class="my-3">
+            <%= post.content %>
+        </p>
+        <div class="post-page-interactions">
+            <span>Likes: <%= post.likes %></span>
         </div>
-        <div class="comments">
-            <div class="comment">
+        <div class="post-page-comments">
+            <div class="post-page-comment">
                 <p></p>
             </div>
         </div>

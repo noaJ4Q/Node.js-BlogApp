@@ -7,12 +7,67 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const data = [
+    {
+        id: 0,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://picsum.photos/200/300',
+        author: 'John Doe',
+        date: '2020-01-04',
+        likes: 0
+    },
+    {
+        id: 1,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://picsum.photos/300/200',
+        author: 'Alex Doe',
+        date: '2020-01-02',
+        likes: 0
+    },
+    {
+        id: 2,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://picsum.photos/200/300',
+        author: 'Jeorge Bush',
+        date: '2020-01-01',
+        likes: 0
+    },
+    {
+        id: 3,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://picsum.photos/300/200',
+        author: 'Hensell Robert',
+        date: '2012-12-30',
+        likes: 0
+    },
+    {
+        id: 4,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://picsum.photos/200/300',
+        author: 'Robert Brown',
+        date: '2019-12-28',
+        likes: 0
+    },
+    
+];
+
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index.ejs',{
+        posts: data
+    });
 });
 
 app.get('/post', (req, res) => {
-    res.render('post.ejs');
+    const id = req.query.id;
+    const post = data.find(post => post.id == id);
+    res.render('post.ejs', {
+        post: post
+    });
 });
 
 app.get('/create', (req, res) => {
