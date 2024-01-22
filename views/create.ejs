@@ -13,8 +13,8 @@
         <form class="my-4 create-post-form" method="post" action="/create">
             <div class="row">
                 <div class="col-8 my-3">
-                    <label for="formFile" class="form-label">Blog image</label>
-                    <input class="form-control" type="file" name="image">
+                    <label for="formFile" class="form-label">Blog image (URL)</label>
+                    <input class="form-control" type="text" name="image">
                 </div>
                 <img class="col-4" src="#" alt="blog-image">
             </div>
@@ -24,9 +24,9 @@
             </div>
             <div class="my-3">
                 <label class="form-label" for="content">Content</label>
-                <textarea class="form-control" rows="5" name="content"></textarea>
+                <textarea class="form-control" rows="10" name="content"></textarea>
             </div>
-            <button class="button primary" type="submit">Upload</button>
+            <button class="button primary my-3" type="submit">Upload</button>
         </form>
     </main>
 </body>

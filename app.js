@@ -79,11 +79,20 @@ app.get('/my-posts', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
-    const title = req.body.title;
-    const content = req.body.content;
-    const image = req.body.image;
 
-    console.log(title, content, image);
+    const date = new Date();
+
+    const newPost = {
+        id: data.length,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        author: 'Noe Jara',
+        date: date.toISOString().slice(0,10),
+    }
+
+    data.push(newPost);
+
     res.redirect('/');
 })
 
