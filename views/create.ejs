@@ -9,24 +9,29 @@
 <body>
     <%- include('partials/nav.ejs') %>
     <main class="container my-4">
-        <h2>Create your new post</h2>
-        <form class="my-4 create-post-form" method="post" action="/create">
+        <h2><%= locals.post !== undefined ? 'Edit post' : 'Create your new post' %></h2>
+        <form class="my-4 create-post-form" method="post" action="<%= locals.post !== undefined ? '/save' : '/create' %>">
+            <% if (locals.post){ %>
+                <input type="hidden" name="id" value="<%= locals.post.id %>">
+            <% } %>
             <div class="row">
                 <div class="col-8 my-3">
                     <label for="formFile" class="form-label">Blog image (URL)</label>
-                    <input class="form-control" type="text" name="image">
+                    <input class="form-control" type="text" name="image" value="<%= locals.post !== undefined ? post.image : ''%>">
                 </div>
                 <img class="col-4" src="#" alt="blog-image">
             </div>
             <div class="my-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" name="title">
+                <input class="form-control" type="text" name="title" value="<%= locals.post !== undefined ? post.title : ''%>">
             </div>
             <div class="my-3">
                 <label class="form-label" for="content">Content</label>
-                <textarea class="form-control" rows="10" name="content"></textarea>
+                <textarea class="form-control" rows="10" name="content"><%= locals.post !== undefined ? post.content : '' %></textarea>
             </div>
-            <button class="button primary my-3" type="submit">Upload</button>
+            <button class="button primary my-3" type="submit">
+                <%= locals.post !== undefined ? 'Save':'Upload' %>
+            </button>
         </form>
     </main>
 </body>

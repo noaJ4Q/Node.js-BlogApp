@@ -75,13 +75,23 @@ app.get('/create', (req, res) => {
 });
 
 app.get('/my-posts', (req, res) => {
-    res.render('my-posts.ejs');
+    const myPosts = data.filter(post => post.author == 'Noe Jara');
+    res.render('my-posts.ejs',{
+        posts: myPosts
+  });
+});
+
+app.get('/edit', (req, res) => {
+    const id = req.query.id;
+    const post = data.find(post => post.id == id);
+    res.render('create.ejs', {
+        post: post
+    });
 });
 
 app.post('/create', (req, res) => {
 
     const date = new Date();
-
     const newPost = {
         id: data.length,
         title: req.body.title,
@@ -92,9 +102,17 @@ app.post('/create', (req, res) => {
     }
 
     data.push(newPost);
-
     res.redirect('/');
 })
+
+app.post('/save', (req, res) => {
+    const id = req.body.id;
+    const post = data.find(post => post.id == id);
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    res.redirect('/');
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

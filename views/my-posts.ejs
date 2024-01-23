@@ -10,6 +10,7 @@
     <%- include('partials/nav.ejs') %>
     <main class="container my-4">
         <h2>My posts</h2>
+        <!--
         <div class="my-post my-4">
             <h3>Post title</h3>
             <div class="my-post-options">
@@ -17,6 +18,24 @@
                 <a class="text-reset" href="/delete">Delete</a>
             </div>
         </div>
+        -->
+        <% 
+        if (posts.length > 0) {
+            for (let i = 0; i < posts.length; i++) { 
+        %>
+        <div class="my-post my-3">
+            <h3><%= posts[i].title %></h3>
+          <div class="my-post-options">
+              <a class="text-reset" href="/edit?id=<%=posts[i].id%>">Edit</a>
+              <a class="text-reset" href="/delete?id=<%=posts[i].id%>">Delete</a>
+          </div>
+        </div>
+        <% 
+            }
+        } else { 
+        %>
+        <p class="text-center my-3">No posts yet</p>
+        <% } %>
     </main>
 </body>
 </html>
