@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const data = [
+let data = [
     {
         id: 0,
         title: 'Lorem ipsum dolor sit amet',
@@ -48,8 +48,8 @@ const data = [
         id: 4,
         title: 'Lorem ipsum dolor sit amet',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://picsum.photos/200/300',
-        author: 'Robert Brown',
+        image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
+        author: 'Noe Jara',
         date: '2019-12-28',
         likes: 0
     },
@@ -111,6 +111,12 @@ app.post('/save', (req, res) => {
     post.title = req.body.title;
     post.content = req.body.content;
     post.image = req.body.image;
+    res.redirect('/');
+});
+
+app.post('/delete', (req, res) => {
+    const id = req.body.id;
+    data = data.filter(post => post.id != id);
     res.redirect('/');
 });
 

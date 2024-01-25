@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My posts</title>
     <%- include('partials/head.ejs') %>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('partials/nav.ejs') %>
     <main class="container my-4">
-        <h2>My posts</h2>
-        <!--
+      <h2>My posts</h2>
+      <!--
         <div class="my-post my-4">
             <h3>Post title</h3>
             <div class="my-post-options">
@@ -19,23 +19,67 @@
             </div>
         </div>
         -->
-        <% 
-        if (posts.length > 0) {
-            for (let i = 0; i < posts.length; i++) { 
-        %>
-        <div class="my-post my-3">
-            <h3><%= posts[i].title %></h3>
-          <div class="my-post-options">
-              <a class="text-reset" href="/edit?id=<%=posts[i].id%>">Edit</a>
-              <a class="text-reset" href="/delete?id=<%=posts[i].id%>">Delete</a>
+      <% if (posts.length > 0) { for (let i = 0; i < posts.length; i++) { %>
+      <div class="my-post my-3">
+        <h3><%= posts[i].title %></h3>
+        <div class="my-post-options">
+          <a class="text-reset" href="/edit?id=<%=posts[i].id%>">Edit</a>
+          <a
+            class="text-reset"
+            href="#confirmModal"
+            data-bs-toggle="modal"
+            data-id="<%=posts[i].id%>"
+            >Delete</a
+          >
+        </div>
+      </div>
+      <% } } else { %>
+      <p class="text-center my-3">No posts yet</p>
+      <% } %>
+    </main>
+
+    <!--Modal-->
+    <div class="modal fade" id="confirmModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Are you sure you want to delete your post?</div>
+          <div class="modal-footer">
+            <form method="post" action="/delete">
+                <input type="hidden" name="id">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
           </div>
         </div>
-        <% 
-            }
-        } else { 
-        %>
-        <p class="text-center my-3">No posts yet</p>
-        <% } %>
-    </main>
-</body>
+      </div>
+    </div>
+
+    <%- include('partials/scripts.ejs') %>
+
+    <script>
+        let formId = document.querySelector('input[name="id"]');
+        const deleteBtns = document.querySelectorAll('.my-post-options a:last-child');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                formId.value = btn.getAttribute('data-id');
+            });
+        });
+    </script>
+
+  </body>
 </html>
