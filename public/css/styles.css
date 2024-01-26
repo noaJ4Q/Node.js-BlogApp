@@ -95,6 +95,23 @@ h1, h2, h3, h4, h5, h6, p{
     margin: 1rem 0;
 }
 
+/* --- POST FORM --- */
+.post-form .post-image{
+    border-radius: .4rem;
+    height: 160px;
+    object-fit: contain;
+}
+
+.no-post-image{
+    background-color: var(--color-gray-hover);
+    border-radius: .4rem;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
 /* --- POST PAGE --- */
 
 .post-page img{
