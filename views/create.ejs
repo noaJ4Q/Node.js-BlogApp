@@ -15,22 +15,20 @@
                 <input type="hidden" name="id" value="<%= locals.post.id %>">
             <% } %>
             <div class="row">
-                <div class="my-3 col-8">
-                    <div>
+                <div class="col-8">
+                    <div class="my-3">
                         <label for="formFile" class="form-label">Blog image (URL)</label>
                         <input class="form-control" type="text" name="image" value="<%= locals.post !== undefined ? post.image : ''%>">
                     </div>
-                    <div>
+                    <div class="my-3">
                         <label class="form-label" for="title">Title</label>
                         <input class="form-control" type="text" name="title" value="<%= locals.post !== undefined ? post.title : ''%>">
                     </div>
                 </div>
                 <div class="col-4 d-flex align-items-center justify-content-center">
-                    <% if (locals.post !== undefined) { %>
-                    <img class="post-image" src="<%= post.image %>" alt="blog-image">
-                    <% } else { %>
-                    <div class="no-post-image">Blog image</div>
-                    <% } %>
+                    <img class="post-image <%= locals.post !== undefined ? '' : 'hidden' %>" 
+                    src="<%= locals.post !== undefined ? post.image : '#' %>" alt="blog-image">
+                    <div class="no-post-image <%= locals.post !== undefined ? 'hidden' : '' %>">Blog image</div>
                 </div>
             </div>
             <div class="my-3">
@@ -44,9 +42,21 @@
     </main>
     <script>
         const postImage = document.querySelector('.post-image');
+        const noPostImage = document.querySelector('.no-post-image');
         const imageInput = document.querySelector('input[name="image"]');
-        imageInput.addEventListener('input', () => {
-            postImage.src = imageInput.value;
+
+        imageInput.addEventListener('input', (event) => {
+            const img = new Image();
+            img.src = imageInput.value;
+            img.onload = () => {
+                postImage.src = imageInput.value;
+                noPostImage.classList.add('hidden');
+                postImage.classList.remove('hidden');
+            }
+            img.onerror = () => {
+                postImage.classList.add('hidden');
+                noPostImage.classList.remove('hidden');
+            }
         });
     </script>
 </body>
