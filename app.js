@@ -15,7 +15,7 @@ let data = [
         image: 'https://picsum.photos/200/300',
         author: 'John Doe',
         date: '2020-01-04',
-        likes: 0
+        likes: 3
     },
     {
         id: 1,
@@ -24,7 +24,7 @@ let data = [
         image: 'https://picsum.photos/300/200',
         author: 'Alex Doe',
         date: '2020-01-02',
-        likes: 0
+        likes: 1
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ let data = [
         image: 'https://picsum.photos/200/300',
         author: 'Jeorge Bush',
         date: '2020-01-01',
-        likes: 0
+        likes: 4
     },
     {
         id: 3,
@@ -42,7 +42,7 @@ let data = [
         image: 'https://picsum.photos/300/200',
         author: 'Hensell Robert',
         date: '2012-12-30',
-        likes: 0
+        likes: 2
     },
     {
         id: 4,
@@ -51,15 +51,44 @@ let data = [
         image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
         author: 'Noe Jara',
         date: '2019-12-28',
-        likes: 0
+        likes: 4
     },
+    {
+        id: 5,
+        title: 'Lorem ipsum dolor sit amet',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
+        image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
+        author: 'Noe Jara',
+        date: '2018-11-20',
+        likes: 1
+    }
     
 ];
 
 app.get('/', (req, res) => {
-    res.render('index.ejs',{
-        posts: data
-    });
+    let parameters = {};
+    let dataFiltered;
+    const filter = req.query.f;
+    if (filter) { // exists filter
+        parameters.filter = filter;
+        dataFiltered = data.toSorted((post1, post2) => post2[filter] - post1[filter]);
+    } else{
+        dataFiltered = data.toSorted((post1, post2) => compareDate(post1.date, post2.date));
+    }
+
+    if (dataFiltered.length > 5){
+        const pages = Math.floor(dataFiltered.length / 5) + 1; // used to render pagination buttons
+        if(req.query.page){
+            const page = req.query.page;
+        }
+        parameters.posts = dataFiltered.slice(0, 5);
+        // TODO: ADD LOGIC TO MAKE SLICE FILTER THE FOLLOWING PAGE USING PAGE VARIABLE;
+        parameters.pages = pages;
+    } else{
+        parameters.posts = dataFiltered;
+    }
+
+    res.render('index.ejs',parameters);
 });
 
 app.get('/post', (req, res) => {
@@ -123,3 +152,10 @@ app.post('/delete', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+function compareDate(date1, date2){
+    const timestamp1 = new Date(date1).getTime();
+    const timestamp2 = new Date(date2).getTime();
+
+    return timestamp2 - timestamp1;
+}

@@ -12,13 +12,13 @@
             <section class="filters my-4">
                 <ul>
                     <li>
-                        <a class="button secondary" href="#">All</a>
+                        <a class="button secondary" href="/">All</a>
                     </li>
                     <li>
-                        <a class="button secondary" href="#">Most liked</a>
+                        <a class="button secondary" href="/?f=likes">Most liked</a>
                     </li>
                     <li>
-                        <a class="button secondary" href="#">Most discussed</a>
+                        <a class="button secondary" href="/">Most discussed</a>
                     </li>
                     <div class="search-bar">
                         <input class="form-control" type="text" name="search" />
@@ -90,15 +90,22 @@
                 </a>
                 <% } %>
             </section>
+            <% if (locals.pages) { %>
             <div class="pagination">
-                <a class="button secondary" href="#">&laquo;</a>
+                <% for (let i = 0; i < pages; i++) { %>
+                <a class="button secondary" href="/?<%= locals.filter !== undefined ? `f=${filter}&`  : '' %>p=<%= i + 1 %>"><%= i + 1 %></a>
+                <% } %>
+
+                <!-- <a class="button secondary" href="#">&laquo;</a>
                 <a class="button secondary" href="#">1</a>
                 <a class="button secondary" href="#">2</a>
                 <a class="button secondary" href="#">3</a>
-                <a class="button secondary" href="#">&raquo;</a>
+                <a class="button secondary" href="#">&raquo;</a> -->
+
             </div>
+            <% } %>
         </main>
-        <footer class="py-4">
+        <footer class="py-4 mt-5">
             <p>&copy; Copyright <%= new Date().getFullYear() %> - <a class="text-reset" target="_blank" href="https://github.com/noaJ4Q">noaJ4Q</a></p>
         </footer>
     </body>
