@@ -92,10 +92,13 @@
             </section>
             <% if (locals.pages) { %>
             <div class="pagination">
+                <!-- ADD LOGIC TO RETURN PAGE IN CASE WE HAVE 2 OR MORE PAGES AND IN CASE WE ARE NOT IN THE FIRST PAGE-->
+                <a href="#" class="button secondary">&laquo;</a>
                 <% for (let i = 0; i < pages; i++) { %>
                 <a class="button secondary" href="/?<%= locals.filter !== undefined ? `f=${filter}&`  : '' %>p=<%= i + 1 %>"><%= i + 1 %></a>
                 <% } %>
-
+                <!-- ADD LOGIC TO ADVANCE PAGE IN CASE WE HAVE 2 OR MORE PAGES AND IN CASE WE ARE NOT IN THE LAST PAGE-->
+                <a class="button secondary" href="#">&raquo;</a>
                 <!-- <a class="button secondary" href="#">&laquo;</a>
                 <a class="button secondary" href="#">1</a>
                 <a class="button secondary" href="#">2</a>

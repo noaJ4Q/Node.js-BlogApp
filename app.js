@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let data = [
     {
         id: 0,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 0',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://picsum.photos/200/300',
         author: 'John Doe',
@@ -19,7 +19,7 @@ let data = [
     },
     {
         id: 1,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 1',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://picsum.photos/300/200',
         author: 'Alex Doe',
@@ -28,7 +28,7 @@ let data = [
     },
     {
         id: 2,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 2',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://picsum.photos/200/300',
         author: 'Jeorge Bush',
@@ -37,7 +37,7 @@ let data = [
     },
     {
         id: 3,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 3',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://picsum.photos/300/200',
         author: 'Hensell Robert',
@@ -46,7 +46,7 @@ let data = [
     },
     {
         id: 4,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 4',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
         author: 'Noe Jara',
@@ -55,7 +55,7 @@ let data = [
     },
     {
         id: 5,
-        title: 'Lorem ipsum dolor sit amet',
+        title: 'Lorem ipsum dolor sit am 5',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
         image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
         author: 'Noe Jara',
@@ -65,25 +65,31 @@ let data = [
     
 ];
 
+const POST_PER_PAGE = 5;
+
 app.get('/', (req, res) => {
     let parameters = {};
     let dataFiltered;
     const filter = req.query.f;
-    if (filter) { // exists filter
+
+    // SELECTING DATA BY FILTER IF EXISTS
+    if (filter) {
         parameters.filter = filter;
         dataFiltered = data.toSorted((post1, post2) => post2[filter] - post1[filter]);
     } else{
         dataFiltered = data.toSorted((post1, post2) => compareDate(post1.date, post2.date));
     }
 
+    // SELECTING RESULT DATA BY PAGE
     if (dataFiltered.length > 5){
-        const pages = Math.floor(dataFiltered.length / 5) + 1; // used to render pagination buttons
-        if(req.query.page){
-            const page = req.query.page;
-        }
-        parameters.posts = dataFiltered.slice(0, 5);
-        // TODO: ADD LOGIC TO MAKE SLICE FILTER THE FOLLOWING PAGE USING PAGE VARIABLE;
+        const pages = Math.ceil(dataFiltered.length / POST_PER_PAGE); // used to render pagination buttons
         parameters.pages = pages;
+        if(req.query.p){
+            const page = req.query.p;
+            parameters.posts = dataFiltered.slice(POST_PER_PAGE * (page-1), POST_PER_PAGE * page);
+        } else {
+            parameters.posts = dataFiltered.slice(0, POST_PER_PAGE);
+        }
     } else{
         parameters.posts = dataFiltered;
     }
