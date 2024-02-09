@@ -12,7 +12,7 @@ let data = [
         id: 0,
         title: 'Lorem ipsum dolor sit am 0',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://picsum.photos/200/300',
+        image: 'https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         author: 'John Doe',
         date: '2020-01-04',
         likes: 3
@@ -21,7 +21,7 @@ let data = [
         id: 1,
         title: 'Lorem ipsum dolor sit am 1',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://picsum.photos/300/200',
+        image: 'https://img.freepik.com/free-vector/blogging-fun-content-creation-online-streaming-video-blog-young-girl-making-selfie-social-network-sharing-feedback-self-promotion-strategy-vector-isolated-concept-metaphor-illustration_335657-855.jpg',
         author: 'Alex Doe',
         date: '2020-01-02',
         likes: 1
@@ -30,7 +30,7 @@ let data = [
         id: 2,
         title: 'Lorem ipsum dolor sit am 2',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://picsum.photos/200/300',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2yRdT1xenMf5uIItUTqUTP4gioX3ORSHsSM3k-IkVLw&s',
         author: 'Jeorge Bush',
         date: '2020-01-01',
         likes: 4
@@ -39,7 +39,7 @@ let data = [
         id: 3,
         title: 'Lorem ipsum dolor sit am 3',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://picsum.photos/300/200',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Blog_%281%29.jpg',
         author: 'Hensell Robert',
         date: '2012-12-30',
         likes: 2
@@ -57,7 +57,7 @@ let data = [
         id: 5,
         title: 'Lorem ipsum dolor sit am 5',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum.',
-        image: 'https://www.lifewire.com/thmb/SXXIxF9Dk8xcHcn78erflIqFLRI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Dawkinsmeme-09a60a478f2849178939f9bfe701a7dd.jpg',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ00FxpyHsslrKah8AYyY01Gwu77MLbGglS-g&usqp=CAU',
         author: 'Noe Jara',
         date: '2018-11-20',
         likes: 1
@@ -86,8 +86,10 @@ app.get('/', (req, res) => {
         parameters.pages = pages;
         if(req.query.p){
             const page = req.query.p;
+            parameters.page = page;
             parameters.posts = dataFiltered.slice(POST_PER_PAGE * (page-1), POST_PER_PAGE * page);
         } else {
+            parameters.page = 1;
             parameters.posts = dataFiltered.slice(0, POST_PER_PAGE);
         }
     } else{

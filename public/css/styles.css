@@ -5,6 +5,8 @@
     --color-black-hover: #000000;
     --color-gray: #f7f7f7;
     --color-gray-hover: #eaeaea;
+    --color-gray-selected: #c7c7c7;
+    --color-gray-selected-hover: #9d9d9d;
 }
 
 h1, h2, h3, h4, h5, h6, p{
@@ -172,6 +174,14 @@ h1, h2, h3, h4, h5, h6, p{
 
 .secondary:hover{
     background-color: var(--color-gray-hover);
+}
+
+.selected {
+    background-color: var(--color-gray-selected);
+}
+
+.selected:hover {
+    background-color: var(--color-gray-selected-hover);
 }
 
 footer{

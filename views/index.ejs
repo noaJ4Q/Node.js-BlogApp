@@ -12,13 +12,13 @@
             <section class="filters my-4">
                 <ul>
                     <li>
-                        <a class="button secondary" href="/">All</a>
+                        <a class="button secondary <%= !locals.filter ? 'selected' : '' %>" href="/">All</a>
                     </li>
                     <li>
-                        <a class="button secondary" href="/?f=likes">Most liked</a>
+                        <a class="button secondary <%= locals.filter === 'likes' ? 'selected' : '' %> " href="/?f=likes">Most liked</a>
                     </li>
                     <li>
-                        <a class="button secondary" href="/">Most discussed</a>
+                        <a class="button secondary <%= locals.filter === 'discussed' ? 'selected' : '' %>" href="/">Most discussed</a>
                     </li>
                     <div class="search-bar">
                         <input class="form-control" type="text" name="search" />
@@ -93,12 +93,18 @@
             <% if (locals.pages) { %>
             <div class="pagination">
                 <!-- ADD LOGIC TO RETURN PAGE IN CASE WE HAVE 2 OR MORE PAGES AND IN CASE WE ARE NOT IN THE FIRST PAGE-->
-                <a href="#" class="button secondary">&laquo;</a>
-                <% for (let i = 0; i < pages; i++) { %>
-                <a class="button secondary" href="/?<%= locals.filter !== undefined ? `f=${filter}&`  : '' %>p=<%= i + 1 %>"><%= i + 1 %></a>
+                <% if (page > 1) {%>
+                <a class="button secondary" href="/?<%= locals.filter !== undefined ? `f=${filter}&` : '' %>p=<%= Number(page) - 1 %>">&laquo;</a>
                 <% } %>
+
+                <% for (let i = 0; i < pages; i++) { %>
+                <a class="button secondary <%= Number(page) === i + 1 ? 'selected' : '' %>" href="/?<%= locals.filter !== undefined ? `f=${filter}&` : '' %>p=<%= i + 1 %>"><%= i + 1 %></a>
+                <% } %>
+
                 <!-- ADD LOGIC TO ADVANCE PAGE IN CASE WE HAVE 2 OR MORE PAGES AND IN CASE WE ARE NOT IN THE LAST PAGE-->
-                <a class="button secondary" href="#">&raquo;</a>
+                <% if (page < pages && pages > 1) {%>
+                <a class="button secondary" href="/?<%= locals.filter !== undefined ? `f=${filter}&` : '' %>p=<%= Number(page) + 1 %>">&raquo;</a>
+                <% } %>
                 <!-- <a class="button secondary" href="#">&laquo;</a>
                 <a class="button secondary" href="#">1</a>
                 <a class="button secondary" href="#">2</a>
