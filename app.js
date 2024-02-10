@@ -128,6 +128,10 @@ app.get('/edit', (req, res) => {
 
 app.post('/create', (req, res) => {
 
+    if(!validPost(req.body)){
+        return res.redirect('/create');
+    }
+
     const date = new Date();
     const newPost = {
         id: data.length,
@@ -140,14 +144,22 @@ app.post('/create', (req, res) => {
 
     data.push(newPost);
     res.redirect('/');
+
 })
 
 app.post('/save', (req, res) => {
+
     const id = req.body.id;
-    const post = data.find(post => post.id == id);
-    post.title = req.body.title;
-    post.content = req.body.content;
-    post.image = req.body.image;
+
+    if (!validPost(req.body)){
+        return res.redirect(`/edit?id=${id}`);
+    }
+
+    // const post = data.find(post => post.id == id);
+    // post.title = req.body.title;
+    // post.content = req.body.content;
+    // post.image = req.body.image;
+
     res.redirect('/');
 });
 
@@ -166,4 +178,8 @@ function compareDate(date1, date2){
     const timestamp2 = new Date(date2).getTime();
 
     return timestamp2 - timestamp1;
+}
+
+const validPost = (body) => {
+    return body.title && body.content && body.image;
 }
