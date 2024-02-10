@@ -199,3 +199,11 @@ footer{
         --bs-gutter-x: 2.5rem;
     }
 }
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 600px){
+    .post-info {
+        height: auto;
+    }
+}

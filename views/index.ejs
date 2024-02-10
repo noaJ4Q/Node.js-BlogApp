@@ -62,13 +62,13 @@
                 <% for (let i = 0; i < posts.length; i++) { %>
                 <a class="text-reset text-decoration-none" href="post?id=<%= posts[i].id %>">
                     <article class="post my-4 p-4">
-                        <div class="post-info mb-4 row">
+                        <div class="post-info mb-4 row align-items-center">
                             <div class="col-sm-8">
                                 <h2 class="mb-2"><%= posts[i].title %></h2>
                                 <p class="post-content"><%= posts[i].content %></p>
                             </div>
                             <img
-                                class="post-img col-4"
+                                class="post-img col-sm-4 mt-4 m-sm-0"
                                 src="<%= posts[i].image %>"
                                 alt="post-img"
                             />
