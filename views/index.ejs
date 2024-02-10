@@ -17,12 +17,12 @@
                     <li>
                         <a class="button secondary <%= locals.filter === 'likes' ? 'selected' : '' %> " href="/?f=likes">Most liked</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a class="button secondary <%= locals.filter === 'discussed' ? 'selected' : '' %>" href="/">Most discussed</a>
-                    </li>
-                    <div class="search-bar">
+                    </li> -->
+                    <!-- <div class="search-bar">
                         <input class="form-control" type="text" name="search" />
-                    </div>
+                    </div> -->
                 </ul>
             </section>
             <section class="posts">
@@ -78,13 +78,13 @@
                                 <span> Author: <%= posts[i].author %> </span>
                                 <span> Date: <%= posts[i].date %> </span>
                                 <span> Likes: <%= posts[i].likes %> </span>
-                                <span>comments</span>
+                                <!-- <span>comments</span> -->
                             </div>
-                            <div class="post-feature post-tags">
+                            <!-- <div class="post-feature post-tags">
                                 <span>tag1</span>
                                 <span>tag2</span>
                                 <span>tag3</span>
-                            </div>
+                            </div> -->
                         </div>
                     </article>
                 </a>
