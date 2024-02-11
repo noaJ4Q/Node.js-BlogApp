@@ -18,11 +18,17 @@
                 <div class="col-8">
                     <div class="my-3">
                         <label for="formFile" class="form-label">Blog image (URL)</label>
-                        <input class="form-control" type="text" name="image" value="<%= locals.post !== undefined ? post.image : ''%>">
+                        <input class="form-control <%= locals.image ? 'is-invalid' : '' %>" type="text" name="image" value="<%= locals.post !== undefined ? post.image : ''%>">
+                        <% if (locals.image) { %>
+                        <div class="invalid-feedback"><%= image %></div>
+                        <% } %>
                     </div>
                     <div class="my-3">
                         <label class="form-label" for="title">Title</label>
-                        <input class="form-control" type="text" name="title" value="<%= locals.post !== undefined ? post.title : ''%>">
+                        <input class="form-control <%= locals.title ? 'is-invalid' : '' %>" type="text" name="title" value="<%= locals.post !== undefined ? post.title : ''%>">
+                        <% if (locals.title) { %>
+                        <div class="invalid-feedback"><%= title %></div>
+                        <% } %>
                     </div>
                 </div>
                 <div class="col-4 d-flex align-items-center justify-content-center">
@@ -33,7 +39,10 @@
             </div>
             <div class="my-3">
                 <label class="form-label" for="content">Content</label>
-                <textarea class="form-control" rows="10" name="content"><%= locals.post !== undefined ? post.content : '' %></textarea>
+                <textarea class="form-control <%= locals.content ? 'is-invalid' : '' %>" rows="10" name="content"><%= locals.post !== undefined ? post.content : '' %></textarea> 
+                <% if (locals.content) { %>
+                <div class="invalid-feedback"><%= content %></div>
+                <% } %>
             </div>
             <button class="button primary my-3" type="submit">
                 <%= locals.post !== undefined ? 'Save':'Upload' %>

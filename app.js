@@ -129,7 +129,12 @@ app.get('/edit', (req, res) => {
 app.post('/create', (req, res) => {
 
     if(!validPost(req.body)){
-        return res.redirect('/create');
+        const validParameters = checkValidParameters(req.body);
+        const invalidParameters = checkParameters(req.body);
+        return res.render('create.ejs', {
+            post: validParameters,
+            ...invalidParameters
+        });
     }
 
     const date = new Date();
@@ -152,13 +157,19 @@ app.post('/save', (req, res) => {
     const id = req.body.id;
 
     if (!validPost(req.body)){
+        const post = data.find(post => post.id = id);
+        const invalidParameters = checkParameters(req.body);
+        return res.render('create.ejs', {
+            post: post,
+            ...invalidParameters
+        });
         return res.redirect(`/edit?id=${id}`);
     }
 
-    // const post = data.find(post => post.id == id);
-    // post.title = req.body.title;
-    // post.content = req.body.content;
-    // post.image = req.body.image;
+    const post = data.find(post => post.id == id);
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
 
     res.redirect('/');
 });
@@ -182,4 +193,36 @@ function compareDate(date1, date2){
 
 const validPost = (body) => {
     return body.title && body.content && body.image;
+}
+
+const checkParameters = (body) => {
+    const invalidParameters = {};
+
+    if (body.title === '') {
+        invalidParameters.title = 'Enter a valid title';
+    }
+    if (body.content === '') {
+        invalidParameters.content = 'Enter a valid content';
+    }
+    if (body.image === '') {
+        invalidParameters.image = 'Enter a valid image';
+    }
+
+    return invalidParameters;
+}
+
+const checkValidParameters = (body) => {
+    const validParameters = {};
+
+    if (body.title !== '') {
+        validParameters.title = body.title;
+    }
+    if (body.content !== '') {
+        validParameters.content = body.content;
+    }
+    if (body.image !== '') {
+        validParameters.image = body.image;
+    }
+
+    return validParameters;
 }
