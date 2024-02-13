@@ -54,6 +54,11 @@
         const noPostImage = document.querySelector('.no-post-image');
         const imageInput = document.querySelector('input[name="image"]');
 
+        if (postImage.getAttribute('src') === '') {
+            postImage.classList.add('hidden');
+            noPostImage.classList.remove('hidden');
+        }
+
         imageInput.addEventListener('input', (event) => {
             const img = new Image();
             img.src = imageInput.value;

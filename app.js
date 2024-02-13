@@ -163,7 +163,6 @@ app.post('/save', (req, res) => {
             post: post,
             ...invalidParameters
         });
-        return res.redirect(`/edit?id=${id}`);
     }
 
     const post = data.find(post => post.id == id);
