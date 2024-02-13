@@ -44,7 +44,7 @@
                 <div class="invalid-feedback"><%= content %></div>
                 <% } %>
             </div>
-            <button class="button primary my-3" type="submit">
+            <button disabled id="submitButton" class="button primary my-3" type="submit">
                 <%= locals.post !== undefined ? 'Save':'Upload' %>
             </button>
         </form>
@@ -53,6 +53,11 @@
         const postImage = document.querySelector('.post-image');
         const noPostImage = document.querySelector('.no-post-image');
         const imageInput = document.querySelector('input[name="image"]');
+        const titleInput = document.querySelector('input[name="title"]');
+        const contentInput = document.querySelector('textarea[name="content"]');
+        const submitButton = document.getElementById('submitButton');
+
+        evaluateParameters();
 
         if (postImage.getAttribute('src') === '') {
             postImage.classList.add('hidden');
@@ -72,6 +77,21 @@
                 noPostImage.classList.remove('hidden');
             }
         });
+
+        titleInput.addEventListener('input', () => {
+            evaluateParameters();
+        })
+
+        contentInput.addEventListener('input', () => {
+            evaluateParameters();
+        })
+
+        function evaluateParameters() {
+            if (imageInput.value !== '' && titleInput.value !== '' && contentInput.value !== '') {
+                submitButton.disabled = false;
+            }
+        }
+
     </script>
 </body>
 </html>

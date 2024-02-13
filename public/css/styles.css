@@ -159,6 +159,14 @@ h1, h2, h3, h4, h5, h6, p{
     padding: .4rem .8rem;
 }
 
+button:disabled {
+    background-color: gray;
+}
+
+button:disabled:hover {
+    background-color: gray;
+}
+
 .primary{
     background-color: var(--color-black);
     color: white;
